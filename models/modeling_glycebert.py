@@ -6,7 +6,7 @@
 @contact : zijun_sun@shannonai.com
 @date  : 2020/9/6 18:50
 @version: 1.0
-@desc  : Chinese
+@desc  : ChineseBert Model
 """
 import warnings
 

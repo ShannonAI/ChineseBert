@@ -6,7 +6,7 @@
 @contact : zijun_sun@shannonai.com
 @date  : 2020/8/23 10:40
 @version: 1.0
-@desc  : 【Bert原始】+【字音】+【字形】的embedding
+@desc  : 【char embedding】+【pinyin embedding】+【glyph embedding】 = fusion embedding
 """
 import os
 
@@ -63,11 +63,11 @@ class FusionBertEmbeddings(nn.Module):
         if inputs_embeds is None:
             inputs_embeds = self.word_embeddings(input_ids)
 
-        # 获取三种embedding
+        # get char embedding, pinyin embedding and glyph embedding
         word_embeddings = inputs_embeds  # [bs,l,hidden_size]
         pinyin_embeddings = self.pinyin_embeddings(pinyin_ids)  # [bs,l,hidden_size]
         glyph_embeddings = self.glyph_map(self.glyph_embeddings(input_ids))  # [bs,l,hidden_size]
-        # 通过fc映射维度
+        # fusion layer
         concat_embeddings = torch.cat((word_embeddings, pinyin_embeddings, glyph_embeddings), 2)
         inputs_embeds = self.map_fc(concat_embeddings)
 

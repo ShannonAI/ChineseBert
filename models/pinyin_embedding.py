@@ -6,7 +6,7 @@
 @contact : zijun_sun@shannonai.com
 @date  : 2020/8/16 14:45
 @version: 1.0
-@desc  : 拼音的embedding
+@desc  : pinyin embedding
 """
 import json
 import os
@@ -39,7 +39,7 @@ class PinyinEmbedding(nn.Module):
         Returns:
             pinyin_embed: (bs,sentence_length,pinyin_out_dim)
         """
-        # 使用输入的pinyin_ids构造卷积输入
+        # input pinyin ids for 1-D conv
         embed = self.embedding(pinyin_ids)  # [bs,sentence_length,pinyin_locs,embed_size]
         bs, sentence_length, pinyin_locs, embed_size = embed.shape
         view_embed = embed.view(-1, pinyin_locs, embed_size)  # [(bs*sentence_length),pinyin_locs,embed_size]

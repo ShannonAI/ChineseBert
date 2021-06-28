@@ -25,40 +25,40 @@ class BertMaskDataset(object):
         self.max_length = max_length
         self.tokenizer = BertWordPieceTokenizer(vocab_file)
 
-        # 加载拼音映射字典
+        # load pinyin map dict
         with open(os.path.join(config_path, 'pinyin_map.json'), encoding='utf8') as fin:
             self.pinyin_dict = json.load(fin)
-        # 加载字符id映射tensor
+        # load char id map tensor
         with open(os.path.join(config_path, 'id2pinyin.json'), encoding='utf8') as fin:
             self.id2pinyin = json.load(fin)
-        # 加载拼音映射tensor
+        # load pinyin map tensor
         with open(os.path.join(config_path, 'pinyin2tensor.json'), encoding='utf8') as fin:
             self.pinyin2tensor = json.load(fin)
 
     def mask_sentence(self, sentence, location):
-        # 将句子转为ids
+        # convert sentence to ids
         tokenizer_output = self.tokenizer.encode(sentence)
         bert_tokens = tokenizer_output.ids
         pinyin_tokens = self.convert_sentence_to_pinyin_ids(sentence, tokenizer_output)
-        # mask
+        # add mask
         bert_tokens[location + 1] = 103
         pinyin_tokens[location + 1] = [0] * 8
-        # 验证正确性，id个数应该相同
+        # assert，token nums should be same as pinyin token nums
         assert len(bert_tokens) <= self.max_length
         assert len(bert_tokens) == len(pinyin_tokens)
-        # 转化list为tensor
+        # convert list to tensor
         input_ids = torch.LongTensor(bert_tokens)
         pinyin_ids = torch.LongTensor(pinyin_tokens).view(-1)
         return input_ids, pinyin_ids
 
     def convert_sentence_to_pinyin_ids(self, sentence: str, tokenizer_output: tokenizers.Encoding) -> List[List[int]]:
-        # 获取句子拼音
+        # get pinyin of a sentence
         pinyin_list = pinyin(sentence, style=Style.TONE3, heteronym=True, errors=lambda x: [['not chinese'] for _ in x])
         pinyin_locs = {}
-        # 获取有中文的位置的拼音
+        # get pinyin of each location
         for index, item in enumerate(pinyin_list):
             pinyin_string = item[0]
-            # 不是中文字符，则跳过
+            # not a Chinese character, pass
             if pinyin_string == "not chinese":
                 continue
             if pinyin_string in self.pinyin2tensor:
@@ -72,7 +72,7 @@ class BertMaskDataset(object):
                     ids[i] = self.pinyin_dict["char2idx"][p]
                 pinyin_locs[index] = ids
 
-        # 根据BPE的结果，取有中文的地方，构造ids
+        # find chinese character location, and generate pinyin ids
         pinyin_ids = []
         for idx, (token, offset) in enumerate(zip(tokenizer_output.tokens, tokenizer_output.offsets)):
             if offset[1] - offset[0] != 1:
