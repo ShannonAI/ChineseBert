@@ -5,7 +5,7 @@ then run the entire masked sentence through the model and has to predict the mas
 First, you have to prepare pretrained ChineseBert model.
  
  - Model can be find here: [ChineseBERT-base](https://huggingface.co/zijun/ChineseBERT-base) or 
- [ChineseBert-large](https://huggingface.co/zijun/ChineseBERT-large).  
+ [ChineseBERT-large](https://huggingface.co/zijun/ChineseBERT-large).  
    Download model and save at `[CHINESEBERT_PATH]`
  
    
