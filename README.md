@@ -13,7 +13,7 @@ This repository contains code, model, dataset for [ChineseBERT]() at ACL2021.
 | [Introduction](#Introduction) | Introduction to ChineseBERT |  
 | [Download](#Download) | Download links for ChineseBERT |
 | [Quick Load](#Quick-Load) | Learn how to quickly load our models |
-| [Experiment results](#Experiment results) | Experiment results on several Chinese NLP datasets |
+| [Experiment](#Experiments) | Experiment results on several Chinese NLP datasets |
 | [Citation](#Citation) | Citation | 
 | [Contact](#Contact) | How to contact to us | 
 
@@ -67,7 +67,7 @@ Here is a quick tour to load our model.
 The complete example can be find here: 
 [Masked word completion with ChineseBERT](tasks/language_model/README.md)
 
-## Experiment results
+## Experiments
 
 
 ## Contact
