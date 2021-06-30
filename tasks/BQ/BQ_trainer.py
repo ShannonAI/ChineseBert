@@ -118,7 +118,7 @@ class BQTask(pl.LightningModule):
         return {'val_loss': avg_loss, 'log': tensorboard_logs}
 
     def train_dataloader(self) -> DataLoader:
-        return self.get_dataloader("dev")
+        return self.get_dataloader("train")
 
     def val_dataloader(self):
         return self.get_dataloader("dev")
@@ -138,7 +138,7 @@ class BQTask(pl.LightningModule):
         return dataloader
 
     def test_dataloader(self):
-        return self.get_dataloader("dev")
+        return self.get_dataloader("test")
 
     def test_step(self, batch, batch_idx):
         loss, acc = self.compute_loss_and_acc(batch)
