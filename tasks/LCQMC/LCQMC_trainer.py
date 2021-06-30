@@ -27,7 +27,7 @@ from transformers import AdamW, BertConfig
 from datasets.collate_functions import collate_to_max_length
 from datasets.spm_dataset import SPMDataset
 from models.modeling_glycebert import GlyceBertForSequenceClassification
-from utils.radom_seed import set_random_seed
+from utils.random_seed import set_random_seed
 
 set_random_seed(random.randint(1, 100))
 
