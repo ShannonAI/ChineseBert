@@ -131,7 +131,7 @@ class XNLITask(pl.LightningModule):
     def get_dataloader(self, prefix="train") -> DataLoader:
         """get training dataloader"""
 
-        dataset = XNLIDataset(data_path=os.path.join(self.args.data_dir, prefix + '.tsv'),
+        dataset = XNLIDataset(data_path=os.path.join(self.args.data_dir, 'xnli_' + prefix + '.tsv'),
                               chinese_bert_path=self.args.bert_path,
                               max_length=self.args.max_length)
         dataloader = DataLoader(
@@ -174,6 +174,7 @@ def get_parser():
     parser.add_argument("--checkpoint_path", type=str, help="train checkpoint")
     parser.add_argument("--save_topk", default=1, type=int, help="save topk checkpoint")
     parser.add_argument("--mode", default='train', type=str, help="train or evaluate")
+    parser.add_argument("--warmup_proporation", default=0.01, type=float, help="warmup proporation")
     return parser
 
 

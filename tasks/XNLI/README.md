@@ -9,6 +9,8 @@ We only use Chinese data.
 
 ## Train and Evaluate
 Download ChineseBERT model and save at `[CHINESEBERT_PATH]`.  
+To be simplify, XNLI is a classification task with four classes, so you have to
+modify `[CHINESEBERT_PATH]/config.json` file, and set `"num_labels":4`.   
 Run the following scripts to train and evaluate. 
 ```
 python XNLI_trainer.py \
