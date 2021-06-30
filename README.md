@@ -69,6 +69,63 @@ The complete example can be find here:
 
 ## Experiments
 
+## ChnSetiCorp
+ChnSetiCorp is a dataset for sentiment analysis.  
+Evaluation Metrics: Accuracy
+
+| Model  | Dev | Test |  
+|  ----  | ----  | ----  |
+| ERNIE |  95.4 |   95.5  |
+| BERT | 95.1 |  95.4 |  
+| BERT-wwm | 95.4 | 95.3 |  
+| RoBERTa |  95.0 |  95.6 |  
+| MacBERT | 95.2 |   95.6 |  
+| ChineseBERT | **95.6** | **95.7** |  
+|   | ----  | ----  |  
+| RoBERTa-large | **95.8** | 95.8 |  
+| MacBERT-large |  95.7 |  **95.9** |  
+| ChineseBERT-large | **95.8** |  **95.9** | 
+
+Training details and code can be find [HERE](tasks/ChnSetiCorp/README.md)
+
+### THUCNews
+THUCNews contains news in 10 categories.  
+Evaluation Metrics: Accuracy
+
+| Model  | Dev | Test |  
+|  ----  | ----  | ----  |
+| ERNIE |  95.4 |   95.5  |
+| BERT | 95.1 |  95.4 |  
+| BERT-wwm | 95.4 | 95.3 |  
+| RoBERTa |  95.0 |  95.6 |  
+| MacBERT | 95.2 |   95.6 |  
+| ChineseBERT | **95.6** | **95.7** |  
+|   | ----  | ----  |  
+| RoBERTa-large | **95.8** | 95.8 |  
+| MacBERT-large |  95.7 |  **95.9** |  
+| ChineseBERT-large | **95.8** |  **95.9** |
+
+Training details and code can be find [HERE](tasks/THUCNew/README.md)
+
+### XNLI
+XNLI is a dataset for natural language inference.  
+Evaluation Metrics: Accuracy  
+
+| Model  | Dev | Test |  
+|  ----  | ----  | ----  |
+| ERNIE |  79.7 |   78.6  |
+| BERT | 79.0 |  78.2 |  
+| BERT-wwm | 79.4 | 78.7 |  
+| RoBERTa |  80.0 |  78.8 |  
+| MacBERT | 80.3 |  79.3 |  
+| ChineseBERT | **80.5** | **79.6** |  
+|   | ----  | ----  |  
+| RoBERTa-large | 82.1 | 81.2 |  
+| MacBERT-large |  82.4 |  81.3 |  
+| ChineseBERT-large | **82.7** |  **81.6** |
+
+Training details and code can be find [HERE](tasks/XNLI/README.md)
+
 ### BQ
 BQ Corpus is a sentence pair matching dataset.  
 Evaluation Metrics: Accuracy
@@ -89,7 +146,7 @@ Evaluation Metrics: Accuracy
 Training details and code can be find [HERE](tasks/BQ/README.md)
 
 ### LCQMC
-BQ Corpus is a sentence pair matching dataset.  
+LCQMC Corpus is a sentence pair matching dataset.  
 Evaluation Metrics: Accuracy
 
 | Model  | Dev | Test |  
