@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-@file  : LCQMC_trainer.py
+@file  : THUCNews_trainer.py
 @author: zijun
 @contact : zijun_sun@shannonai.com
-@date  : 2021/6/29 20:09
+@date  : 2021/6/30 20:33
 @version: 1.0
-@desc  : code for LCQMC task
+@desc  : code for THUCNews task
 """
 import argparse
 import json
@@ -22,17 +22,18 @@ from pytorch_lightning.loggers import TensorBoardLogger
 from torch.nn import functional as F
 from torch.nn.modules import CrossEntropyLoss
 from torch.utils.data.dataloader import DataLoader
-from transformers import AdamW, BertConfig
+from transformers import AdamW, BertConfig, get_linear_schedule_with_warmup
 
 from datasets.collate_functions import collate_to_max_length
-from datasets.spm_dataset import SPMDataset
+from datasets.thucnew_dataset import ThuCNewsDataset
 from models.modeling_glycebert import GlyceBertForSequenceClassification
 from utils.random_seed import set_random_seed
 
+# set_random_seed(42)
 set_random_seed(random.randint(1, 100))
 
 
-class LCQMCTask(pl.LightningModule):
+class ChnSentiClassificationTask(pl.LightningModule):
 
     def __init__(
         self,
@@ -44,7 +45,8 @@ class LCQMCTask(pl.LightningModule):
         if isinstance(args, argparse.Namespace):
             self.save_hyperparameters(args)
         self.bert_dir = args.bert_path
-        self.bert_config = BertConfig.from_pretrained(self.bert_dir, output_hidden_states=False)
+        self.bert_config = BertConfig.from_pretrained(self.bert_dir, output_hidden_states=False,
+                                                      hidden_dropout_prob=0.2)
         self.model = GlyceBertForSequenceClassification.from_pretrained(self.bert_dir)
 
         self.loss_fn = CrossEntropyLoss()
@@ -70,7 +72,12 @@ class LCQMCTask(pl.LightningModule):
                           betas=(0.9, 0.98),  # according to RoBERTa paper
                           lr=self.args.lr,
                           eps=self.args.adam_epsilon)
-        return [optimizer]
+        t_total = len(self.train_dataloader()) // self.args.accumulate_grad_batches * self.args.max_epochs
+        warmup_steps = int(self.args.warmup_proporation * t_total)
+        scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,
+                                                    num_training_steps=t_total)
+
+        return [optimizer], [{"scheduler": scheduler, "interval": "step"}]
 
     def forward(self, input_ids, pinyin_ids):
         """"""
@@ -118,27 +125,28 @@ class LCQMCTask(pl.LightningModule):
         return {'val_loss': avg_loss, 'log': tensorboard_logs}
 
     def train_dataloader(self) -> DataLoader:
-        return self.get_dataloader("train")
+        return self.get_dataloader("val")
 
     def val_dataloader(self):
-        return self.get_dataloader("dev")
+        return self.get_dataloader("val")
 
     def get_dataloader(self, prefix="train") -> DataLoader:
-        """get training dataloader"""
-        dataset = SPMDataset(data_path=os.path.join(self.args.data_dir, prefix + '.tsv'),
-                             chinese_bert_path=self.args.bert_path,
-                             max_length=self.args.max_length)
+        dataset = ThuCNewsDataset(data_path=os.path.join(self.args.data_dir, 'cnews.' + prefix + '.txt'),
+                                  chinese_bert_path=self.args.bert_path,
+                                  max_length=self.args.max_length)
+
         dataloader = DataLoader(
             dataset=dataset,
             batch_size=self.args.batch_size,
             num_workers=self.args.workers,
+            shuffle=True,
             collate_fn=partial(collate_to_max_length, fill_values=[0, 0, 0]),
             drop_last=False
         )
         return dataloader
 
     def test_dataloader(self):
-        return self.get_dataloader("test")
+        return self.get_dataloader("val")
 
     def test_step(self, batch, batch_idx):
         loss, acc = self.compute_loss_and_acc(batch)
@@ -155,19 +163,20 @@ class LCQMCTask(pl.LightningModule):
 def get_parser():
     parser = argparse.ArgumentParser(description="Training")
     parser.add_argument("--bert_path", required=True, type=str, help="bert config file")
-    parser.add_argument("--data_dir", required=True, type=str, help="train data path")
-    parser.add_argument("--save_path", required=True, type=str, help="train data path")
-    parser.add_argument("--batch_size", type=int, default=16, help="batch size")
+    parser.add_argument("--batch_size", type=int, default=8, help="batch size")
     parser.add_argument("--lr", type=float, default=2e-5, help="learning rate")
-    parser.add_argument("--workers", type=int, default=3, help="num workers for dataloader")
+    parser.add_argument("--workers", type=int, default=2, help="num workers for dataloader")
     parser.add_argument("--weight_decay", default=0.0, type=float, help="Weight decay if we apply some.")
     parser.add_argument("--adam_epsilon", default=1e-8, type=float, help="Epsilon for Adam optimizer.")
     parser.add_argument("--warmup_steps", default=0, type=int, help="warmup steps")
     parser.add_argument("--use_memory", action="store_true", help="load datasets to memory to accelerate.")
     parser.add_argument("--max_length", default=512, type=int, help="max length of datasets")
-    parser.add_argument("--checkpoint_path", type=str, help="train checkpoint")
-    parser.add_argument("--save_topk", default=1, type=int, help="save topk checkpoint")
-    parser.add_argument("--mode", default='train', type=str, help="train or evaluate")
+    parser.add_argument("--data_dir", required=True, type=str, help="train data path")
+    parser.add_argument("--save_path", required=True, type=str, help="train data path")
+    parser.add_argument("--save_topk", default=5, type=int, help="save topk checkpoint")
+    parser.add_argument("--pretrain_checkpoint", default="", type=str, help="train data path")
+    parser.add_argument("--checkpoint_path", default="", type=str, help="train data path")
+    parser.add_argument("--warmup_proporation", default=0.01, type=float, help="warmup proporation")
     return parser
 
 
@@ -181,7 +190,7 @@ def main():
     if not os.path.exists(args.save_path):
         os.mkdir(args.save_path)
 
-    model = LCQMCTask(args)
+    model = ChnSentiClassificationTask(args)
 
     checkpoint_callback = ModelCheckpoint(
         filepath=os.path.join(args.save_path, 'checkpoint', '{epoch}-{val_loss:.4f}-{val_acc:.4f}'),

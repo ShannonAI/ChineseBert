@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-@file  : LCQMC_trainer.py
+@file  : XNLI_trainer.py
 @author: zijun
 @contact : zijun_sun@shannonai.com
-@date  : 2021/6/29 20:09
+@date  : 2021/6/29 23:42
 @version: 1.0
-@desc  : code for LCQMC task
+@desc  : code for XNLI task
 """
 import argparse
 import json
@@ -22,17 +22,17 @@ from pytorch_lightning.loggers import TensorBoardLogger
 from torch.nn import functional as F
 from torch.nn.modules import CrossEntropyLoss
 from torch.utils.data.dataloader import DataLoader
-from transformers import AdamW, BertConfig
+from transformers import AdamW, BertConfig, get_linear_schedule_with_warmup
 
 from datasets.collate_functions import collate_to_max_length
-from datasets.spm_dataset import SPMDataset
+from datasets.xnli_dataset import XNLIDataset
 from models.modeling_glycebert import GlyceBertForSequenceClassification
 from utils.random_seed import set_random_seed
 
 set_random_seed(random.randint(1, 100))
 
 
-class LCQMCTask(pl.LightningModule):
+class XNLITask(pl.LightningModule):
 
     def __init__(
         self,
@@ -70,7 +70,12 @@ class LCQMCTask(pl.LightningModule):
                           betas=(0.9, 0.98),  # according to RoBERTa paper
                           lr=self.args.lr,
                           eps=self.args.adam_epsilon)
-        return [optimizer]
+        t_total = len(self.train_dataloader()) // self.args.accumulate_grad_batches * self.args.max_epochs
+        warmup_steps = int(self.args.warmup_proporation * t_total)
+        scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,
+                                                    num_training_steps=t_total)
+
+        return [optimizer], [{"scheduler": scheduler, "interval": "step"}]
 
     def forward(self, input_ids, pinyin_ids):
         """"""
@@ -125,9 +130,10 @@ class LCQMCTask(pl.LightningModule):
 
     def get_dataloader(self, prefix="train") -> DataLoader:
         """get training dataloader"""
-        dataset = SPMDataset(data_path=os.path.join(self.args.data_dir, prefix + '.tsv'),
-                             chinese_bert_path=self.args.bert_path,
-                             max_length=self.args.max_length)
+
+        dataset = XNLIDataset(data_path=os.path.join(self.args.data_dir, 'xnli_' + prefix + '.tsv'),
+                              chinese_bert_path=self.args.bert_path,
+                              max_length=self.args.max_length)
         dataloader = DataLoader(
             dataset=dataset,
             batch_size=self.args.batch_size,
@@ -168,6 +174,7 @@ def get_parser():
     parser.add_argument("--checkpoint_path", type=str, help="train checkpoint")
     parser.add_argument("--save_topk", default=1, type=int, help="save topk checkpoint")
     parser.add_argument("--mode", default='train', type=str, help="train or evaluate")
+    parser.add_argument("--warmup_proporation", default=0.01, type=float, help="warmup proporation")
     return parser
 
 
@@ -181,7 +188,7 @@ def main():
     if not os.path.exists(args.save_path):
         os.mkdir(args.save_path)
 
-    model = LCQMCTask(args)
+    model = XNLITask(args)
 
     checkpoint_callback = ModelCheckpoint(
         filepath=os.path.join(args.save_path, 'checkpoint', '{epoch}-{val_loss:.4f}-{val_acc:.4f}'),
