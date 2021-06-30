@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-@file  : LCQMC.py
+@file  : LCQMC_trainer.py
 @author: zijun
 @contact : zijun_sun@shannonai.com
 @date  : 2021/6/29 20:09

@@ -69,6 +69,43 @@ The complete example can be find here:
 
 ## Experiments
 
+### BQ
+BQ Corpus is a sentence pair matching dataset.  
+Evaluation Metrics: Accuracy
+
+| Model  | Dev | Test |  
+|  ----  | ----  | ----  |
+| ERNIE | 86.3 | 85.0  |
+| BERT | 86.1 | 85.2 |  
+| BERT-wwm | **86.4** | **85.3** |  
+| RoBERTa |  86.0 | 85.0 |  
+| MacBERT | 86.0 | 85.2 |  
+| ChineseBERT | **86.4** | 85.2 |  
+|    | ----  | ----  |
+| RoBERTa-large | 86.3 | 85.8 |  
+| MacBERT-large |  86.2 | 85.6 |  
+| ChineseBERT-large | **86.5** |  **86.0** | 
+
+Training details and code can be find [HERE](tasks/BQ/README.md)
+
+### LCQMC
+BQ Corpus is a sentence pair matching dataset.  
+Evaluation Metrics: Accuracy
+
+| Model  | Dev | Test |  
+|  ----  | ----  | ----  |
+| ERNIE | 89.8 |  87.2  |
+| BERT | 89.4 | 87.0 |  
+| BERT-wwm | 89.6 | 87.1 |  
+| RoBERTa |  89.0 |  86.4 |  
+| MacBERT | 89.5 | 87.0 |  
+| ChineseBERT | **89.8** | **87.4** |  
+|   | ----  | ----  |  
+| RoBERTa-large | 90.4 | 87.0 |  
+| MacBERT-large |  **90.6** | 87.6 |  
+| ChineseBERT-large | 90.5 |  **87.8** |  
+
+Training details and code can be find [HERE](tasks/LCQMC/README.md)
 
 ## Contact
 If you have any question about our paper/code/modal/data...  
