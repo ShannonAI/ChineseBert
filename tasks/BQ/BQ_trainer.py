@@ -29,7 +29,7 @@ from datasets.spm_dataset import SPMDataset
 from models.modeling_glycebert import GlyceBertForSequenceClassification
 from utils.random_seed import set_random_seed
 
-set_random_seed(random.randint(1, 100))
+set_random_seed(2333)
 
 
 class BQTask(pl.LightningModule):

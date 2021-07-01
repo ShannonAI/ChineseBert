@@ -29,7 +29,7 @@ from datasets.xnli_dataset import XNLIDataset
 from models.modeling_glycebert import GlyceBertForSequenceClassification
 from utils.random_seed import set_random_seed
 
-set_random_seed(random.randint(1, 100))
+set_random_seed(2333)
 
 
 class XNLITask(pl.LightningModule):
