@@ -2,7 +2,7 @@
 
 This repository contains code, model, dataset for [ChineseBERT]() at ACL2021.
 
-**[ChineseBERT: Chinese Pretraining Enhanced by Glyph and Pinyin Information]()**  
+**[ChineseBERT: Chinese Pretraining Enhanced by Glyph and Pinyin Information](https://arxiv.org/pdf/2106.16038.pdf)**  
 *Zijun Sun, Xiaoya Li, Xiaofei Sun, Yuxian Meng, Xiang Ao, Qing He, Fei Wu and Jiwei Li*
 
 
