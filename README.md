@@ -175,10 +175,10 @@ Evaluation Metrics: Accuracy
 | BERT | 56.09 |  56.58 | 
 | BERT-wwm | 56.77 | 56.86 | 
 | RoBERTa |   57.51 |  56.94 | 
-| ChineseBERT | 58.64 | 58.95 | 
+| ChineseBERT | **58.64** | **58.95** | 
 |   | ----  | ----  |  
 | RoBERTa-large | 58.32 | 58.61 | 
-| ChineseBERT-large |  59.06 | 59.47 | 
+| ChineseBERT-large |  **59.06** | **59.47** | 
 
 Training details and code can be find [HERE](tasks/TNews/README.md)
 
@@ -192,11 +192,11 @@ Evaluation Metrics: Span-Level F1
 | Model  |  Test Precision |  Test Recall |  Test F1 |  
 |  ----  | ----  | ----  | ----  |
 | BERT | 79.69 | 82.09 | 80.87 | 
-| RoBERTa |  80.43 | 80.30 |  80.37 | 
-| ChineseBERT | 80.03 | 83.33 | 81.65 | 
+| RoBERTa |  **80.43** | 80.30 |  80.37 | 
+| ChineseBERT | 80.03 | **83.33** | **81.65** | 
 |    | ----  | ----  | ----  |
 | RoBERTa-large |  80.72 | 82.07 | 81.39 |
-| ChineseBERT-large | 80.77 | 83.65 | 82.18 | 
+| ChineseBERT-large | **80.77** | **83.65** | **82.18** | 
 
 Training details and code can be find [HERE](tasks/OntoNotes/README.md)
 
@@ -210,11 +210,11 @@ Evaluation Metrics: Span-Level F1
 | Model  |  Test Precision |  Test Recall |  Test F1 |  
 |  ----  | ----  | ----  | ----  |
 | BERT | 67.12 | 66.88 |  67.33 |
-| RoBERTa | 68.49 | 67.81 | 68.15 |
-| ChineseBERT | 68.27 | 69.78 | 69.02 |
+| RoBERTa | **68.49** | 67.81 | 68.15 |
+| ChineseBERT | 68.27 | **69.78** | **69.02** |
 |  | ----  | ----  | ----  |
 | RoBERTa-large |  66.74 | 70.02 | 68.35 |
-| ChineseBERT-large | 68.75 | 72.97 | 70.80 |
+| ChineseBERT-large | **68.75** | **72.97** | **70.80** |
 
 Training details and code can be find [HERE](tasks/Weibo/README.md)
 
