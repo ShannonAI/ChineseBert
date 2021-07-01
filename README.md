@@ -12,10 +12,10 @@ This repository contains code, model, dataset for [ChineseBERT]() at ACL2021.
 |  ----  | ----  |
 | [Introduction](#Introduction) | Introduction to ChineseBERT |  
 | [Download](#Download) | Download links for ChineseBERT |
-| [Quick Load](#Quick-Load) | Learn how to quickly load our models |
-| [Experiment](#Experiments) | Experiment results on several Chinese NLP datasets |
+| [Quick Load](#Quick-Load) | Learn how to quickly load models |
+| [Experiment](#Experiments) | Experiment results on different Chinese NLP datasets |
 | [Citation](#Citation) | Citation | 
-| [Contact](#Contact) | How to contact to us | 
+| [Contact](#Contact) | How to contact us | 
 
 ## Introduction
 We propose ChineseBERT, which incorporates both the glyph and pinyin information of Chinese
