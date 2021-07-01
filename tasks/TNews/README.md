@@ -23,9 +23,7 @@ CUDA_VISIBLE_DEVICES=0 python3 $REPO_PATH/tasks/TNews/TNews_trainer.py \
 --accumulate_grad_batches 2 \
 --save_topk 20 \
 --val_check_interval 0.25 \
---pretrain_checkpoint [CHINESEBERT_PATH] \
 --bert_path [CHINESEBERT_PATH] \
---config_path [CHINESEBERT_PATH] \
 --data_dir [TNEWS_DATA_PATH] \
 --save_path [OUTPUT_PATH] \
 --gpus="1" \

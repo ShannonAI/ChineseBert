@@ -25,8 +25,6 @@ CUDA_VISIBLE_DEVICES=0 python3 $REPO_PATH/tasks/OntoNotes/OntoNotes_trainer.py \
 --save_path [OUTPUT_PATH] \
 --bert_path [CHINESEBERT_PATH] \
 --data_dir [ONTONOTES_DATA_PATH] \
---config_path [CHINESEBERT_PATH] \
---pretrain_checkpoint [CHINESEBERT_PATH] \
 --gpus="1"
 ```
 

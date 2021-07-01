@@ -148,7 +148,8 @@ class TNewsTask(pl.LightningModule):
         """get training dataloader"""
         dataset = TNewsDataset(directory=self.args.data_dir, prefix=prefix,
                                vocab_file=os.path.join(self.args.bert_path, "vocab.txt"),
-                               config_path=self.args.config_path, max_length=self.args.max_length,)
+                               config_path=os.path.join(self.args.bert_path, "config"),
+                               max_length=self.args.max_length,)
 
         if prefix == "train":
             # define data_generator will help experiment reproducibility.
@@ -196,8 +197,6 @@ def get_parser():
     parser.add_argument("--data_dir", required=True, type=str, help="train data path")
     parser.add_argument("--save_path", required=True, type=str, help="train data path")
     parser.add_argument("--save_topk", default=1, type=int, help="save topk checkpoint")
-    parser.add_argument("--config_path", required=True, type=str, help="checkpoint path")
-    parser.add_argument("--pretrain_checkpoint", default="", type=str, help="train data path")
     parser.add_argument("--warmup_proportion", default=0.01, type=float)
     parser.add_argument("--hidden_dropout_prob", default=0.1, type=float, help="dropout probability")
 
@@ -211,9 +210,6 @@ def main():
     args = parser.parse_args()
 
     model = TNewsTask(args)
-    if args.pretrain_checkpoint:
-        checkpoint = torch.load(args.pretrain_checkpoint, map_location=torch.device('cpu'))
-        model.load_state_dict(checkpoint['state_dict'], strict=False)
 
     checkpoint_callback = ModelCheckpoint(
         filepath=os.path.join(args.save_path, 'checkpoint', '{epoch}-{val_loss:.4f}-{val_acc:.4f}'),
