@@ -166,7 +166,7 @@ Training details and code can be find [HERE](tasks/LCQMC/README.md)
 
 ### TNEWS
 
-TNEWS is a 15-class short news text classification dataset.
+TNEWS is a 15-class short news text classification dataset. <br>
 Evaluation Metrics: Accuracy
 
 | Model  | Dev | Test |  
@@ -194,7 +194,7 @@ Evaluation Metrics: Span-Level F1
 | BERT | 79.69 | 82.09 | 80.87 | 
 | RoBERTa |  80.43 | 80.30 |  80.37 | 
 | ChineseBERT | 80.03 | 83.33 | 81.65 | 
-|  ----  | ----  | ----  | ----  |
+|    | ----  | ----  | ----  |
 | RoBERTa-large |  80.72 | 82.07 | 81.39 |
 | ChineseBERT-large | 80.77 | 83.65 | 82.18 | 
 
@@ -212,7 +212,7 @@ Evaluation Metrics: Span-Level F1
 | BERT | 67.12 | 66.88 |  67.33 |
 | RoBERTa | 68.49 | 67.81 | 68.15 |
 | ChineseBERT | 68.27 | 69.78 | 69.02 |
-|  ----  | ----  | ----  | ----  |
+|  | ----  | ----  | ----  |
 | RoBERTa-large |  66.74 | 70.02 | 68.35 |
 | ChineseBERT-large | 68.75 | 72.97 | 70.80 |
 
