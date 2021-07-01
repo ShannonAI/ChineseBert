@@ -29,7 +29,7 @@ from datasets.collate_functions import collate_to_max_length
 from models.modeling_glycebert import GlyceBertForSequenceClassification
 from utils.random_seed import set_random_seed
 
-set_random_seed(random.randint(1, 100))
+set_random_seed(2333)
 
 
 class ChnSentiClassificationTask(pl.LightningModule):

@@ -26,9 +26,7 @@ CUDA_VISIBLE_DEVICES=1 python3 $REPO_PATH/tasks/Weibo/Weibo_trainer.py \
 --gpus="1" \
 --bert_path [CHINESEBERT_PATH] \
 --data_dir [WEIBO_DATA_PATH] \
---save_path [OUTPUT_PATH] \
---config_path [CHINESEBERT_PATH] \
---pretrain_checkpoint [CHINESEBERT_PATH] 
+--save_path [OUTPUT_PATH] 
 ```
 
 ## Result

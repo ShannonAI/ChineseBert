@@ -30,7 +30,7 @@ from models.modeling_glycebert import GlyceBertForSequenceClassification
 from utils.random_seed import set_random_seed
 
 # set_random_seed(42)
-set_random_seed(random.randint(1, 100))
+set_random_seed(2333)
 
 
 class ChnSentiClassificationTask(pl.LightningModule):
@@ -174,7 +174,6 @@ def get_parser():
     parser.add_argument("--data_dir", required=True, type=str, help="train data path")
     parser.add_argument("--save_path", required=True, type=str, help="train data path")
     parser.add_argument("--save_topk", default=5, type=int, help="save topk checkpoint")
-    parser.add_argument("--pretrain_checkpoint", default="", type=str, help="train data path")
     parser.add_argument("--checkpoint_path", default="", type=str, help="train data path")
     parser.add_argument("--warmup_proporation", default=0.01, type=float, help="warmup proporation")
     return parser

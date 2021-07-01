@@ -174,7 +174,7 @@ class WeiboTask(pl.LightningModule):
         dataset = WeiboNERDataset(directory=self.args.data_dir, prefix=prefix,
                                   vocab_file=os.path.join(self.args.bert_path, "vocab.txt"),
                                   max_length=self.args.max_length,
-                                  config_path=self.args.config_path)
+                                  config_path=os.path.join(self.args.bert_path, "config"))
 
         return dataset
 
@@ -262,8 +262,6 @@ def get_parser():
     parser.add_argument("--data_dir", type=str, help="train data path")
     parser.add_argument("--save_path", type=str, help="train data path")
     parser.add_argument("--save_topk", default=1, type=int, help="save topk checkpoint")
-    parser.add_argument("--config_path", type=str, help="checkpoint path")
-    parser.add_argument("--pretrain_checkpoint", default="", type=str, help="train data path")
     parser.add_argument("--warmup_proportion", default=0.1, type=float, help="Proportion of training to perform linear learning rate warmup for.")
     parser.add_argument("--hidden_dropout_prob", type=float, default=0.1, )
     parser.add_argument("--seed", type=int, default=2333)
@@ -282,12 +280,7 @@ def main():
     parser = get_parser()
     parser = Trainer.add_argparse_args(parser)
     args = parser.parse_args()
-
-    # set_random_seed(args.seed)
     model = WeiboTask(args)
-    if args.pretrain_checkpoint:
-        checkpoint = torch.load(args.pretrain_checkpoint, map_location=torch.device("cpu"))
-        model.load_state_dict(checkpoint["state_dict"], strict=False)
 
     checkpoint_callback = ModelCheckpoint(
         filepath=os.path.join(args.save_path, "checkpoint", "{epoch}",),
