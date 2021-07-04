@@ -182,6 +182,24 @@ Evaluation Metrics: Accuracy
 
 Training details and code can be find [HERE](tasks/TNews/README.md)
 
+### CMRC
+
+CMRC is a machin reading comprehension task dataset.  
+Evaluation Metrics: EM
+
+| Model  | Dev | Test |  
+|  ----  | ----  | ----  |
+| ERNIE |  66.89 |   74.70  |
+| BERT | 66.77 |  71.60 |  
+| BERT-wwm | 66.96 | 73.95 |  
+| RoBERTa |  67.89 |  75.20 |  
+| MacBERT | - |   - |  
+| ChineseBERT | **67.95** | **95.7** |  
+|   | ----  | ----  |  
+| RoBERTa-large | 70.59 | 77.95 |  
+| ChineseBERT-large | **70.70** |  **78.05** |  
+
+Training details and code can be find [HERE](tasks/CMRC/README.md)
 
 ### OntoNotes
 
