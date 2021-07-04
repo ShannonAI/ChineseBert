@@ -45,6 +45,9 @@ python cmrc_evluate.py \
     --gpus=0,
 ```
 
+The test file will be generated at `[OUTPUT_PATH]\test_predictions.json`,
+ upload the file to [CLUE](https://www.cluebenchmarks.com/introduce.html) to get 
+ the test score.
 
 ## Result
 The evaluation metric is **EM**.  
