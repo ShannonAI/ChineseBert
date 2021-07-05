@@ -14,9 +14,10 @@ python LCQMC_trainer.py \
   --bert_path [CHINESEBERT_PATH] \
   --data_dir [LCQMC_DATA_PATH] \
   --save_path [OUTPUT_PATH] \
-  --max_epoch=5 \
+  --max_epoch=7 \
   --lr=2e-5 \
-  --gpus=0,1
+  --batch_size=16 \
+  --gpus=0,1，2,3,4
 ```
 
 ## Result
