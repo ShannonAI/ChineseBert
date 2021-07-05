@@ -49,8 +49,8 @@ Our model can be downloaded here:
 
 | Model | Model Hub | Size |
 | --- | --- | --- |
-| **`ChineseBERT-base`**  | [Pytorch](https://huggingface.co/zijun/ChineseBERT-base) | 564M |
-| **`ChineseBERT-large`**   | [Pytorch](https://huggingface.co/zijun/ChineseBERT-large) | 1.4G |
+| **`ChineseBERT-base`**  | [Pytorch](https://huggingface.co/ShannonAI/ChineseBERT-base) | 564M |
+| **`ChineseBERT-large`**   | [Pytorch](https://huggingface.co/ShannonAI/ChineseBERT-large) | 1.4G |
 
 *Note: The model hub contains model, fonts and pinyin config files.*
 
