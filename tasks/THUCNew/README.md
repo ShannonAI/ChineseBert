@@ -17,7 +17,8 @@ python THUCNews_trainer.py \
   --save_path [OUTPUT_PATH] \
   --max_epoch=5 \
   --lr=2e-5 \
-  --gpus=0,1
+  --batch_size=8 \
+  --gpus=0,1,2,3
 ```
 
 ## Result

@@ -18,7 +18,8 @@ python XNLI_trainer.py \
   --data_dir [XNLI_DATA_PATH] \
   --save_path [OUTPUT_PATH] \
   --max_epoch=5 \
-  --lr=2e-5 \
+  --batch_size=8 \
+  --lr=3e-5 \
   --gpus=0,1
 ```
 
