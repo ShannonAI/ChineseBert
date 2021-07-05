@@ -12,7 +12,7 @@ This repository contains code, model, dataset for [ChineseBERT]() at ACL2021.
 |  ----  | ----  |
 | [Introduction](#Introduction) | Introduction to ChineseBERT |  
 | [Download](#Download) | Download links for ChineseBERT |
-| [Quick Load](#Quick-Load) | Learn how to quickly load models |
+| [Quick tour](#Quick-tour) | Learn how to quickly load models |
 | [Experiment](#Experiments) | Experiment results on different Chinese NLP datasets |
 | [Citation](#Citation) | Citation | 
 | [Contact](#Contact) | How to contact us | 
@@ -66,6 +66,24 @@ Here is a quick tour to load our model.
 ```
 The complete example can be find here: 
 [Masked word completion with ChineseBERT](tasks/language_model/README.md)
+
+Another example to get representation of a sentence:
+```
+>>> from datasets.bert_dataset import BertDataset
+>>> from models.modeling_glycebert import GlyceBertModel
+
+>>> tokenizer = BertDataset([CHINESEBERT_PATH])
+>>> chinese_bert = GlyceBertModel.from_pretrained([CHINESEBERT_PATH])
+>>> sentence = '我喜欢猫'
+
+>>> input_ids, pinyin_ids = tokenizer.tokenize_sentence(sentence)
+>>> length = input_ids.shape[0]
+>>> input_ids = input_ids.view(1, length)
+>>> pinyin_ids = pinyin_ids.view(1, length, 8)
+>>> output_hidden = chinese_bert.forward(input_ids, pinyin_ids)[0]
+>>> print(output_hidden.shape)
+```
+The complete code can be find [HERE](tasks/language_model/chinese_bert.py)
 
 ## Experiments
 
