@@ -22,7 +22,7 @@ from pytorch_lightning.loggers import TensorBoardLogger
 from torch.nn import functional as F
 from torch.nn.modules import CrossEntropyLoss
 from torch.utils.data.dataloader import DataLoader
-from transformers import AdamW, BertConfig
+from transformers import AdamW, BertConfig, get_linear_schedule_with_warmup
 
 from datasets.collate_functions import collate_to_max_length
 from datasets.spm_dataset import SPMDataset
@@ -70,7 +70,12 @@ class BQTask(pl.LightningModule):
                           betas=(0.9, 0.98),  # according to RoBERTa paper
                           lr=self.args.lr,
                           eps=self.args.adam_epsilon)
-        return [optimizer]
+        t_total = len(self.train_dataloader()) // self.args.accumulate_grad_batches * self.args.max_epochs
+        warmup_steps = int(self.args.warmup_proporation * t_total)
+        scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,
+                                                    num_training_steps=t_total)
+
+        return [optimizer], [{"scheduler": scheduler, "interval": "step"}]
 
     def forward(self, input_ids, pinyin_ids):
         """"""
@@ -168,6 +173,7 @@ def get_parser():
     parser.add_argument("--checkpoint_path", type=str, help="train checkpoint")
     parser.add_argument("--save_topk", default=1, type=int, help="save topk checkpoint")
     parser.add_argument("--mode", default='train', type=str, help="train or evaluate")
+    parser.add_argument("--warmup_proporation", default=0.01, type=float, help="warmup proporation")
     return parser
 
 

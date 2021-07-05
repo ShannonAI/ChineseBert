@@ -14,9 +14,14 @@ python BQ_trainer.py \
   --bert_path [CHINESEBERT_PATH] \
   --data_dir [BQ_DATA_PATH] \
   --save_path [OUTPUT_PATH] \
-  --max_epoch=5 \
+  --max_epoch=10 \
   --lr=3e-5 \
-  --gpus=0,1
+  --batch_size=4 \
+  --accumulate_grad_batches 4 \
+  --warmup_proporation 0.1 \
+  --weight_decay=0.001 \
+  --precision 16 \
+  --gpus=0,1,2,3
 ```
 
 ## Result
