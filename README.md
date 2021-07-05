@@ -81,7 +81,13 @@ Another example to get representation of a sentence:
 >>> input_ids = input_ids.view(1, length)
 >>> pinyin_ids = pinyin_ids.view(1, length, 8)
 >>> output_hidden = chinese_bert.forward(input_ids, pinyin_ids)[0]
->>> print(output_hidden.shape)
+>>> print(output_hidden)
+tensor([[[ 0.0235, -0.0072,  0.0399,  ...,  0.0213, -0.0668, -0.1477],
+         [ 0.0278, -0.1559, -0.1326,  ...,  0.0854,  0.0183, -0.1272],
+         [ 0.1517, -0.1534, -0.1353,  ..., -0.0408, -0.0064, -0.2332],
+         [-0.0102,  0.1028, -0.0807,  ...,  0.0071,  0.0220, -0.3317],
+         [ 0.0235, -0.0072,  0.0399,  ...,  0.0213, -0.0668, -0.1477]]],
+       grad_fn=<NativeLayerNormBackward>)
 ```
 The complete code can be find [HERE](tasks/language_model/chinese_bert.py)
 

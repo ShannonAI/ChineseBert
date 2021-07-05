@@ -33,7 +33,7 @@ def sentence_hidden():
     input_ids = input_ids.view(1, length)
     pinyin_ids = pinyin_ids.view(1, length, 8)
     output_hidden = chinese_bert.forward(input_ids, pinyin_ids)[0]
-    print(output_hidden.shape)
+    print(output_hidden)
 
 
 if __name__ == '__main__':
