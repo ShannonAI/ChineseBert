@@ -3,7 +3,7 @@ Weibo is a Chinese named entity recognition dataset and contains 4 named entity 
 Weibo respectively contains 1,350/270/270 instances for training/dev/test.
 
 ## Dataset
-The Weibo NER dataset using BMES tagging schema can be find [HERE](https://drive.google.com/open?id=1mDKkc2-8e4wXAuAnGiZMHI59UgVbl1q4)  
+The Weibo NER dataset using BMES tagging schema can be find [HERE](https://drive.google.com/file/d/1ZRE5r-PbdNF1KeklZbt4CZrAWnc8agys/view?usp=sharing)  
 Download the corpus and save data at `[WEIBO_DATA_PATH]`
 
 
