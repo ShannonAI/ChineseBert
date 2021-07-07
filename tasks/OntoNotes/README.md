@@ -3,7 +3,7 @@ OntoNotes 4.0 is a Chinese named entity recognition dataset and contains 18 name
 OntoNotes 4.0 contains 15K/4K/4K instances for training/dev/test. <br>
 
 ## Dataset
-The OntoNotes 4.0 NER dataset using BMES tagging schema can be find [HERE](https://drive.google.com/open?id=1mDKkc2-8e4wXAuAnGiZMHI59UgVbl1q4)  
+The OntoNotes 4.0 NER dataset using BMES tagging schema can be find [HERE](https://drive.google.com/file/d/1qH4NDMRYRZYX9CWPLyF5KQLTpX-vvm39/view?usp=sharing)  
 Download the corpus and save data at `[ONTONOTES_DATA_PATH]`
 
 ## Train and Evaluate
