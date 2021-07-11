@@ -12,7 +12,7 @@ This repository contains code, model, dataset for [ChineseBERT]() at ACL2021.
 |  ----  | ----  |
 | [Introduction](#Introduction) | Introduction to ChineseBERT |  
 | [Download](#Download) | Download links for ChineseBERT |
-| [Quick Load](#Quick-Load) | Learn how to quickly load models |
+| [Quick tour](#Quick-tour) | Learn how to quickly load models |
 | [Experiment](#Experiments) | Experiment results on different Chinese NLP datasets |
 | [Citation](#Citation) | Citation | 
 | [Contact](#Contact) | How to contact us | 
@@ -49,8 +49,8 @@ Our model can be downloaded here:
 
 | Model | Model Hub | Size |
 | --- | --- | --- |
-| **`ChineseBERT-base`**  | [Pytorch](https://huggingface.co/zijun/ChineseBERT-base) | 564M |
-| **`ChineseBERT-large`**   | [Pytorch](https://huggingface.co/zijun/ChineseBERT-large) | 1.4G |
+| **`ChineseBERT-base`**  | [Pytorch](https://huggingface.co/ShannonAI/ChineseBERT-base) | 564M |
+| **`ChineseBERT-large`**   | [Pytorch](https://huggingface.co/ShannonAI/ChineseBERT-large) | 1.4G |
 
 *Note: The model hub contains model, fonts and pinyin config files.*
 
@@ -66,6 +66,31 @@ Here is a quick tour to load our model.
 ```
 The complete example can be find here: 
 [Masked word completion with ChineseBERT](tasks/language_model/README.md)
+
+Another example to get representation of a sentence:
+```
+>>> from datasets.bert_dataset import BertDataset
+>>> from models.modeling_glycebert import GlyceBertModel
+
+>>> tokenizer = BertDataset([CHINESEBERT_PATH])
+>>> chinese_bert = GlyceBertModel.from_pretrained([CHINESEBERT_PATH])
+>>> sentence = '我喜欢猫'
+
+>>> input_ids, pinyin_ids = tokenizer.tokenize_sentence(sentence)
+>>> length = input_ids.shape[0]
+>>> input_ids = input_ids.view(1, length)
+>>> pinyin_ids = pinyin_ids.view(1, length, 8)
+>>> output_hidden = chinese_bert.forward(input_ids, pinyin_ids)[0]
+>>> print(output_hidden)
+tensor([[[ 0.0287, -0.0126,  0.0389,  ...,  0.0228, -0.0677, -0.1519],
+         [ 0.0144, -0.2494, -0.1853,  ...,  0.0673,  0.0424, -0.1074],
+         [ 0.0839, -0.2989, -0.2421,  ...,  0.0454, -0.1474, -0.1736],
+         [-0.0499, -0.2983, -0.1604,  ..., -0.0550, -0.1863,  0.0226],
+         [ 0.1428, -0.0682, -0.1310,  ..., -0.1126,  0.0440, -0.1782],
+         [ 0.0287, -0.0126,  0.0389,  ...,  0.0228, -0.0677, -0.1519]]],
+       grad_fn=<NativeLayerNormBackward>)
+```
+The complete code can be find [HERE](tasks/language_model/chinese_bert.py)
 
 ## Experiments
 
@@ -182,6 +207,24 @@ Evaluation Metrics: Accuracy
 
 Training details and code can be find [HERE](tasks/TNews/README.md)
 
+### CMRC
+
+CMRC is a machin reading comprehension task dataset.  
+Evaluation Metrics: EM
+
+| Model  | Dev | Test |  
+|  ----  | ----  | ----  |
+| ERNIE |  66.89 |   74.70  |
+| BERT | 66.77 |  71.60 |  
+| BERT-wwm | 66.96 | 73.95 |  
+| RoBERTa |  67.89 |  75.20 |  
+| MacBERT | - |   - |  
+| ChineseBERT | **67.95** | **95.7** |  
+|   | ----  | ----  |  
+| RoBERTa-large | 70.59 | 77.95 |  
+| ChineseBERT-large | **70.70** |  **78.05** |  
+
+Training details and code can be find [HERE](tasks/CMRC/README.md)
 
 ### OntoNotes
 

@@ -13,9 +13,12 @@ python ChnSetiCorp_trainer.py \
   --bert_path [CHINESEBERT_PATH] \
   --data_dir [ChnSetiCorp_DATA_PATH] \
   --save_path [OUTPUT_PATH] \
-  --max_epoch=5 \
+  --max_epoch=10 \
   --lr=2e-5 \
-  --gpus=0,1
+  --warmup_proporation 0.1 \
+  --batch_size=16 \
+  --weight_decay=0.0001 \
+  --gpus=0,
 ```
 
 ## Result
