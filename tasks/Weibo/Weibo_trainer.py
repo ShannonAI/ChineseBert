@@ -97,9 +97,7 @@ class WeiboTask(pl.LightningModule):
         if self.args.no_lr_scheduler:
             return [optimizer]
         else:
-            scheduler = get_linear_schedule_with_warmup(
-                optimizer, num_warmup_steps=warmup_steps, num_training_steps=t_total
-            )
+            scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=t_total)
             return [optimizer], [{"scheduler": scheduler, "interval": "step"}]
 
     def forward(self, input_ids, pinyin_ids):

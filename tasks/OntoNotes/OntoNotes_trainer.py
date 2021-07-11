@@ -31,7 +31,7 @@ import torch
 from torch.nn import functional as F
 from torch.nn.modules import CrossEntropyLoss
 from torch.utils.data.dataloader import DataLoader, RandomSampler, SequentialSampler
-from transformers import AdamW, BertConfig, get_linear_schedule_with_warmup
+from transformers import AdamW, BertConfig, get_linear_schedule_with_warmup, get_polynomial_decay_schedule_with_warmup
 
 import pytorch_lightning as pl
 from pytorch_lightning import Trainer
@@ -97,9 +97,7 @@ class OntoNotesTask(pl.LightningModule):
         if self.args.no_lr_scheduler:
             return [optimizer]
         else:
-            scheduler = get_linear_schedule_with_warmup(
-                optimizer, num_warmup_steps=warmup_steps, num_training_steps=t_total
-            )
+            scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=t_total)
             return [optimizer], [{"scheduler": scheduler, "interval": "step"}]
 
     def forward(self, input_ids, pinyin_ids):

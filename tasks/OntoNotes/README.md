@@ -10,22 +10,50 @@ Download the corpus and save data at `[ONTONOTES_DATA_PATH]`
 Download ChineseBERT model and save at `[CHINESEBERT_PATH]`.  
 Run the following scripts to train and evaluate. 
 
+For ChineseBERT-Base (see [chinesebert_base.sh](./OntoNotes/chinesebert_base.sh)), 
+
 ```bash 
 CUDA_VISIBLE_DEVICES=0 python3 $REPO_PATH/tasks/OntoNotes/OntoNotes_trainer.py \
 --lr 3e-5 \
 --max_epochs 5 \
 --max_length 275 \
+--weight_decay 0.001 \
+--hidden_dropout_prob 0.2 \
+--warmup_proportion 0.1  \
+--train_batch_size 26 \
+--accumulate_grad_batches 1 \
+--save_topk 20 \
+--val_check_interval 0.25 \
+--gpus="1" \
+--precision=16 \
+--optimizer torch.adam \
+--classifier multi \
+--bert_path [CHINESEBERT_PATH] \
+--data_dir [ONTONOTES_DATA_PATH] \
+--save_path [OUTPUT_PATH] 
+```
+
+For ChineseBERT-Large (see [chinesebert_large.sh](./OntoNotes/chinesebert_large.sh)), 
+
+```bash 
+CUDA_VISIBLE_DEVICES=1 python3 $REPO_PATH/tasks/OntoNotes/OntoNotes_trainer.py \
+--lr 3e-5 \
+--max_epochs 5 \
+--max_length 275 \
 --weight_decay 0.002 \
---hidden_dropout_prob 0.1 \
---warmup_proportion 0.002  \
---train_batch_size 15 \
+--hidden_dropout_prob 0.2 \
+--warmup_proportion 0.1 \
+--train_batch_size 18 \
 --accumulate_grad_batches 2 \
 --save_topk 20 \
 --val_check_interval 0.25 \
---save_path [OUTPUT_PATH] \
+--gpus="1" \
+--precision=16 \
+--optimizer torch.adam \
+--classifier multi \
 --bert_path [CHINESEBERT_PATH] \
 --data_dir [ONTONOTES_DATA_PATH] \
---gpus="1"
+--save_path [OUTPUT_PATH] 
 ```
 
 ## Result
