@@ -10,20 +10,46 @@ Download the corpus and save data at `[WEIBO_DATA_PATH]`
 ## Train and Evaluate
 Download ChineseBERT model and save at `[CHINESEBERT_PATH]`.  
 Run the following scripts to train and evaluate. 
+
+For ChineseBERT-Base (see [chinesebert_base.sh](./Weibo/chinesebert_base.sh)), 
+
 ```bash 
-CUDA_VISIBLE_DEVICES=1 python3 $REPO_PATH/tasks/Weibo/Weibo_trainer.py \
+CUDA_VISIBLE_DEVICES=0 python3 $REPO_PATH/tasks/Weibo/Weibo_trainer.py \
 --lr 3e-5 \
 --max_epochs 5 \
 --max_length 150 \
 --weight_decay 0.002 \
 --hidden_dropout_prob 0.2 \
---warmup_proportion 0.02  \
+--warmup_proportion 0.02 \
 --train_batch_size 2 \
 --accumulate_grad_batches 1 \
 --save_topk 20 \
 --val_check_interval 0.25 \
---classifier multi \
 --gpus="1" \
+--classifier multi \
+--precision=32 \
+--bert_path [CHINESEBERT_PATH] \
+--data_dir [WEIBO_DATA_PATH] \
+--save_path [OUTPUT_PATH] 
+```
+
+For ChineseBERT-Large (see [chinesebert_large.sh](./Weibo/chinesebert_large.sh)), 
+
+```bash
+CUDA_VISIBLE_DEVICES=1 python3 $REPO_PATH/tasks/Weibo/Weibo_trainer.py \
+--lr 2e-5 \
+--max_epochs 5 \
+--max_length 150 \
+--weight_decay 0.001 \
+--hidden_dropout_prob 0.1 \
+--warmup_proportion 0.02 \
+--train_batch_size 1 \
+--accumulate_grad_batches 1 \
+--save_topk 20 \
+--val_check_interval 0.25 \
+--gpus="1" \
+--optimizer torch.adam \
+--precision=16 \
 --bert_path [CHINESEBERT_PATH] \
 --data_dir [WEIBO_DATA_PATH] \
 --save_path [OUTPUT_PATH] 
