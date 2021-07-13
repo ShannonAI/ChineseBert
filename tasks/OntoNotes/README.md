@@ -10,7 +10,7 @@ Download the corpus and save data at `[ONTONOTES_DATA_PATH]`
 Download ChineseBERT model and save at `[CHINESEBERT_PATH]`.  
 Run the following scripts to train and evaluate. 
 
-For ChineseBERT-Base (see [chinesebert_base.sh](./OntoNotes/chinesebert_base.sh)), 
+For ChineseBERT-Base (see [chinesebert_base.sh](./chinesebert_base.sh)), 
 
 ```bash 
 CUDA_VISIBLE_DEVICES=0 python3 $REPO_PATH/tasks/OntoNotes/OntoNotes_trainer.py \
@@ -33,7 +33,7 @@ CUDA_VISIBLE_DEVICES=0 python3 $REPO_PATH/tasks/OntoNotes/OntoNotes_trainer.py \
 --save_path [OUTPUT_PATH] 
 ```
 
-For ChineseBERT-Large (see [chinesebert_large.sh](./OntoNotes/chinesebert_large.sh)), 
+For ChineseBERT-Large (see [chinesebert_large.sh](./chinesebert_large.sh)), 
 
 ```bash 
 CUDA_VISIBLE_DEVICES=1 python3 $REPO_PATH/tasks/OntoNotes/OntoNotes_trainer.py \
