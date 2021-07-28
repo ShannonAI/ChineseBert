@@ -261,6 +261,18 @@ Evaluation Metrics: Span-Level F1
 
 Training details and code can be find [HERE](tasks/Weibo/README.md)
 
+
+## Citation
+```latex
+@article{sun2021chinesebert,
+  title={ChineseBERT: Chinese Pretraining Enhanced by Glyph and Pinyin Information},
+  author={Sun, Zijun and Li, Xiaoya and Sun, Xiaofei and Meng, Yuxian and Ao, Xiang and He, Qing and Wu, Fei and Li, Jiwei},
+  journal={arXiv preprint arXiv:2106.16038},
+  year={2021}
+}
+```
+
+
 ## Contact
 If you have any question about our paper/code/modal/data...  
 Please feel free to discuss through github issues or emails.  
