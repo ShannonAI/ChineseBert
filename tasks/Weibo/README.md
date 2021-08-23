@@ -9,7 +9,8 @@ Download the corpus and save data at `[WEIBO_DATA_PATH]`
 
 ## Train and Evaluate
 Download ChineseBERT model and save at `[CHINESEBERT_PATH]`.  
-Run the following scripts to train and evaluate. 
+Run the following scripts to train and evaluate. <br>
+For baseline model BERT, please see [bert.sh](../baseline/weibo/bert.sh).
 
 For ChineseBERT-Base (see [chinesebert_base.sh](./chinesebert_base.sh)), 
 
