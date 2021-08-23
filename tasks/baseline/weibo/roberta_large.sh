@@ -42,7 +42,7 @@ CUDA_VISIBLE_DEVICES=3 python3 $REPO_PATH/tasks/baseline/tagging_trainer.py \
 --save_topk ${SAVE_TOPK} \
 --bert_path ${BERT_PATH} \
 --data_dir ${DATA_DIR} \
---task $TASK \
+--task ${TASK} \
 --save_path ${OUTPUT_DIR} \
 --val_check_interval ${VAL_CHECK_INTERVAL} \
 --gpus="1"

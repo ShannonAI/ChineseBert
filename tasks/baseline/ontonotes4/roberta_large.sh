@@ -7,7 +7,7 @@
 # Test F1: 81.39, Precision: 80.72, Recall: 82.07
 # gpu4: /data/xiaoya/outputs/glyce/baselines/0121/onto_large_roberta2_5_2_3e-5_0.01_0.001_275_0.1_9_0.25
 
-TIME=0820
+TIME=0823
 FILE_NAME=onto_large_roberta
 REPO_PATH=/data/xiaoya/workspace/ChineseBert
 BERT_PATH=/data/xiaoya/pretrain_lm/chinese_roberta_wwm_large_ext
@@ -15,13 +15,13 @@ TASK=ontonotes4
 SAVE_TOPK=20
 DATA_DIR=/data/xiaoya/datasets/ner/zhontonotes4
 
-TRAIN_BATCH_SIZE=2
-LR=3e-5
+TRAIN_BATCH_SIZE=4
+LR=4e-5
 WEIGHT_DECAY=0.01
 WARMUP_PROPORTION=0.001
 MAX_LEN=275
 MAX_EPOCH=5
-DROPOUT=0.1
+DROPOUT=0.2
 ACC_GRAD=9
 VAL_CHECK_INTERVAL=0.25
 
@@ -45,7 +45,3 @@ CUDA_VISIBLE_DEVICES=0 python3 $REPO_PATH/tasks/baseline/tagging_trainer.py \
 --save_path ${OUTPUT_DIR} \
 --val_check_interval ${VAL_CHECK_INTERVAL} \
 --gpus="1"
-
-
-
-

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@file  : bert/ner_trainer.py
+@file  : tasks/baseline/tagging_trainer.py
 @author: xiaoya li
 @contact : xiaoya_li@shannonai.com
 @date  : 2021/01/20 16:43
