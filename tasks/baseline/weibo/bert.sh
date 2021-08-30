@@ -7,8 +7,8 @@
 # Test F1: 68.35, Precision: 66.98, Recall: 69.78
 # gpu4: /data/xiaoya/outputs/glyce/baselines/0120/weibo_bert8_5_4_4e-5_0.002_0_150_0.2_1_0.25
 
-TIME=0820
-FILE_NAME=weibo_bert
+TIME=0830
+FILE_NAME=weibo_bert_reproduce
 REPO_PATH=/data/xiaoya/workspace/ChineseBert
 BERT_PATH=/data/xiaoya/pretrain_lm/chinese_L-12_H-768_A-12
 TASK=weibo
@@ -16,9 +16,9 @@ SAVE_TOPK=20
 DATA_DIR=/data/xiaoya/datasets/ner/weibo
 
 # need change
-TRAIN_BATCH_SIZE=4
+TRAIN_BATCH_SIZE=2
 LR=4e-5
-WEIGHT_DECAY=0.002
+WEIGHT_DECAY=0.01
 WARMUP_PROPORTION=0
 MAX_LEN=150
 MAX_EPOCH=5

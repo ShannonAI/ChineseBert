@@ -7,25 +7,22 @@
 # Test F1: 68.15, Precision: 68.49, Recall: 67.81
 # gpu3: /data/xiaoya/outputs/glyce/baselines/0820/weibo2_roberta_5_2_3e-5_0.001_0_150_0.1_1_0.25
 
-
-TIME=0820
-FILE_NAME=weibo_roberta
+TIME=0830
+FILE_NAME=weibo_roberta_reproduce
 REPO_PATH=/data/xiaoya/workspace/ChineseBert
 BERT_PATH=/data/xiaoya/pretrain_lm/chinese_roberta_wwm_ext
 TASK=weibo
 SAVE_TOPK=20
-#ontonotes4, weibo
 DATA_DIR=/data/xiaoya/datasets/ner/weibo
 
-# 12 - 4e-5
 # need change
 TRAIN_BATCH_SIZE=2
-LR=3e-5
-WEIGHT_DECAY=0.001
-WARMUP_PROPORTION=0
+LR=5e-5
+WEIGHT_DECAY=0.02
+WARMUP_PROPORTION=0.1
 MAX_LEN=150
 MAX_EPOCH=5
-DROPOUT=0.1
+DROPOUT=0.2
 ACC_GRAD=1
 VAL_CHECK_INTERVAL=0.25
 
