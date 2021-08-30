@@ -7,6 +7,7 @@ The OntoNotes 4.0 NER dataset using BMES tagging schema can be find [HERE](https
 Download the corpus and save data at `[ONTONOTES_DATA_PATH]`
 
 ## Train and Evaluate
+We use `torch1.7.1+cu101` and please install via `pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html`.
 Download ChineseBERT model and save at `[CHINESEBERT_PATH]`.  
 Run the following scripts to train and evaluate. <br>
 For baseline models including [BERT](https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip), [RoBERTa](https://drive.google.com/open?id=1eHM3l4fMo6DsQYGmey7UZGiTmQquHw25) and [RoBERTa-Large](https://drive.google.com/open?id=1-2vEZfIFCdM1-vJ3GD6DlSyKT4eVXMKq), please see [bert.sh](../baseline/ontonotes4/bert.sh), [roberta.sh](../baseline/ontonotes4/roberta.sh) and [roberta_large.sh](../baseline/ontonotes4/roberta_large.sh), respectively. <br> 
