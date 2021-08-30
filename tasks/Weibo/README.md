@@ -10,7 +10,7 @@ Download the corpus and save data at `[WEIBO_DATA_PATH]`
 ## Train and Evaluate
 Download ChineseBERT model and save at `[CHINESEBERT_PATH]`.  
 Run the following scripts to train and evaluate. <br>
-For baseline models including BERT, RoBERTa and RoBERTa-Large, please see [bert.sh](../baseline/weibo/bert.sh), [roberta.sh](../baseline/weibo/roberta.sh) and [roberta_large.sh](../baseline/weibo/roberta_large.sh), respectively. <br> 
+For baseline models including [BERT](https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip), [RoBERTa](https://drive.google.com/open?id=1eHM3l4fMo6DsQYGmey7UZGiTmQquHw25) and [RoBERTa-Large](https://drive.google.com/open?id=1-2vEZfIFCdM1-vJ3GD6DlSyKT4eVXMKq), please see [bert.sh](../baseline/weibo/bert.sh), [roberta.sh](../baseline/weibo/roberta.sh) and [roberta_large.sh](../baseline/weibo/roberta_large.sh), respectively. <br> 
 
 For ChineseBERT-Base (see [chinesebert_base.sh](./chinesebert_base.sh)), 
 
