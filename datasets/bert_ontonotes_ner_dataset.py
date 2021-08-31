@@ -78,7 +78,7 @@ class BertOntoNotesNERDataset(Dataset):
     def read_conll(input_file, delimiter=" "):
         """load ner dataset from CoNLL-format files."""
         dataset_item_lst = []
-        with open(input_file, "r") as r_f:
+        with open(input_file, "r", encoding="utf-8") as r_f:
             datalines = r_f.readlines()
 
         cached_token, cached_label = [], []

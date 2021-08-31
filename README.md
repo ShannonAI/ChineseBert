@@ -241,6 +241,7 @@ Evaluation Metrics: Span-Level F1
 | RoBERTa-large |  80.72 | 82.07 | 81.39 |
 | ChineseBERT-large | **80.77** | **83.65** | **82.18** | 
 
+For reproducing experiment results, please **install and use** `torch1.7.1+cu101` via `pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html`. <br>
 Training details and code can be find [HERE](tasks/OntoNotes/README.md)
 
 
@@ -259,6 +260,7 @@ Evaluation Metrics: Span-Level F1
 | RoBERTa-large |  66.74 | 70.02 | 68.35 |
 | ChineseBERT-large | **68.75** | **72.97** | **70.80** |
 
+For reproducing experiment results, please **install and use** `torch1.7.1+cu101` via `pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html`. <br>
 Training details and code can be find [HERE](tasks/Weibo/README.md)
 
 
