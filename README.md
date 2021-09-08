@@ -47,10 +47,13 @@ We provide pre-trained ChineseBERT models in Pytorch version and followed huggin
   
 Our model can be downloaded here:
 
-| Model | Model Hub | Size |
-| --- | --- | --- |
-| **`ChineseBERT-base`**  | [Pytorch](https://huggingface.co/ShannonAI/ChineseBERT-base) | 564M |
-| **`ChineseBERT-large`**   | [Pytorch](https://huggingface.co/ShannonAI/ChineseBERT-large) | 1.4G |
+**`ChineseBERT-base(PyTorch)`**  <br>
+- [Model Hub (564M)](https://huggingface.co/ShannonAI/ChineseBERT-base)
+- [Google Drive (560M)](https://drive.google.com/file/d/1VuF6wUNbWGijoch65IcMgLUpi-eSeBMH/view?usp=sharing)
+
+**`ChineseBERT-large(PyTorch)`**  <br>
+- [Model Hub (1.4G)](https://huggingface.co/ShannonAI/ChineseBERT-large)
+- [Google Drive (1.4G)]()
 
 *Note: The model hub contains model, fonts and pinyin config files.*
 
@@ -278,4 +281,4 @@ Training details and code can be find [HERE](tasks/Weibo/README.md)
 ## Contact
 If you have any question about our paper/code/modal/data...  
 Please feel free to discuss through github issues or emails.  
-You can send email to **zijun_sun@shannonai.com** or **shuhe_wang@shannonai.com**
+You can send emails to **zijun_sun@shannonai.com** OR **xiaoya_li@shannonai.com**
