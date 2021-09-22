@@ -20,24 +20,24 @@ set_random_seed(2333)
 from models.modeling_glycebert import GlyceBertForMaskedLM
 
 
-def return_tokenizer(chinese_bert_path):
-    vocab_file = os.path.join(chinese_bert_path, 'vocab.txt')
+def return_tokenizer(chinese_bert_dir):
+    vocab_file = os.path.join(chinese_bert_dir, 'vocab.txt')
     return BertWordPieceTokenizer(vocab_file)
 
-def load_petrained_model(bert_dir, ):
-    chinesebert_config = BertConfig.from_pretrained(bert_dir, output_hidden_states=False, hidden_dropout_prob=0)
-    chinesebert_model = GlyceBertForMaskedLM.from_pretrained(bert_dir, config=chinesebert_config)
-    return chinesebert_model
+def load_petrained_model(chinese_bert_dir, ):
+    chinese_bert_config = BertConfig.from_pretrained(chinese_bert_dir, output_hidden_states=False, hidden_dropout_prob=0)
+    chinese_bert_model = GlyceBertForMaskedLM.from_pretrained(chinese_bert_dir, config=chinese_bert_config)
+    return chinese_bert_model
 
 def main(chinese_bert_dir, input_token_str):
-    chinesebert_model = load_petrained_model(chinese_bert_dir)
+    chinese_bert_model = load_petrained_model(chinese_bert_dir)
 
     data_processor = return_tokenizer(chinese_bert_dir)
-    tokenizer_output = data_processor.tokenizer.encode(input_token_str)
+    tokenizer_output = data_processor.encode(input_token_str)
     bert_tokens = tokenizer_output.ids
     input_ids = torch.LongTensor(bert_tokens)
 
-    embedding_layer = chinesebert_model.bert.embeddings
+    embedding_layer = chinese_bert_model.bert.embeddings
     glyph_embedding = embedding_layer.glyph_map(embedding_layer.glyph_embeddings(input_ids))
     print(glyph_embedding.shape)
     glyph_embedding_lst = glyph_embedding.detach().numpy()
