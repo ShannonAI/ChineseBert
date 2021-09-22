@@ -52,6 +52,5 @@ def main(chinese_bert_dir, input_token_str):
 if __name__ == "__main__":
     bert_dir = "/data/xiaoya/pretrain_lm/ChineseBERT-large"
     input_token_seq = "像 象"
-    input_token_seq = "木 林"
     main(bert_dir, input_token_seq)
 
