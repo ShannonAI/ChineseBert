@@ -49,8 +49,8 @@ Our model can be downloaded here:
 
 | Model | Model Hub | Google Drive |
 | --- | --- | --- |
-| **`ChineseBERT-base`**  | [564M](https://huggingface.co/ShannonAI/ChineseBERT-base) | [560M](https://drive.google.com/file/d/1VuF6wUNbWGijoch65IcMgLUpi-eSeBMH/view?usp=sharing) |
-| **`ChineseBERT-large`**   | [1.4G](https://huggingface.co/ShannonAI/ChineseBERT-large) | [1.4G](https://drive.google.com/file/d/1VdhScpOYupQ6gRU_qVhUK_d4K-XdpkWQ/view?usp=sharing) |
+| **`ChineseBERT-base`**  | [564M](https://huggingface.co/ShannonAI/ChineseBERT-base) | [560M](https://drive.google.com/file/d/17eGO9pnV6U9Q9Q9jihPa7wFIvxnA4M_C/view?usp=sharing) |
+| **`ChineseBERT-large`**   | [1.4G](https://huggingface.co/ShannonAI/ChineseBERT-large) | [1.4G](https://drive.google.com/file/d/12hNnEg6_iCRGOvyoao9aDqZH-atjcwaq/view?usp=sharing) |
 
 
 *Note: The model hub contains model, fonts and pinyin config files.*
