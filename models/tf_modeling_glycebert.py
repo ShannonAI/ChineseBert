@@ -6,12 +6,15 @@ from typing import List
 import numpy as np
 from tensorflow.keras import backend as K
 from transformers.modeling_tf_bert import TFBertPreTrainedModel, TFBertEncoder, TFBertPooler
-from transformers.modeling_tf_utils import shape_list, get_initializer
+from transformers.configuration_bert import BertConfig
+from transformers.modeling_tf_utils import shape_list, get_initializer, keras_serializable
 from transformers.tokenization_utils import BatchEncoding
 from transformers.modeling_tf_outputs import TFBaseModelOutputWithPooling
 
 
+@keras_serializable
 class TFGlyceBertMainLayer(tf.keras.layers.Layer):
+    config_class = BertConfig
     r"""
     Outputs: `Tuple` comprising various elements depending on the configuration (config) and inputs:
         **last_hidden_state**: ``torch.FloatTensor`` of shape ``(batch_size, sequence_length, hidden_size)``
