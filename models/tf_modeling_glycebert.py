@@ -15,6 +15,7 @@ from transformers.modeling_tf_outputs import TFBaseModelOutputWithPooling
 @keras_serializable
 class TFGlyceBertMainLayer(tf.keras.layers.Layer):
     config_class = BertConfig
+
     r"""
     Outputs: `Tuple` comprising various elements depending on the configuration (config) and inputs:
         **last_hidden_state**: ``torch.FloatTensor`` of shape ``(batch_size, sequence_length, hidden_size)``
@@ -43,9 +44,8 @@ class TFGlyceBertMainLayer(tf.keras.layers.Layer):
         last_hidden_states = outputs[0]  # The last hidden-state is the first element of the output tuple
 
     """
-    def __init__(self, config):
-        super(TFGlyceBertMainLayer, self).__init__(config, name="bert")
-        self.config = config
+    def __init__(self, config, **kwargs):
+        super().__init__(**kwargs)
 
         self.num_hidden_layers = config.num_hidden_layers
         self.initializer_range = config.initializer_range
@@ -59,6 +59,13 @@ class TFGlyceBertMainLayer(tf.keras.layers.Layer):
 
     def get_input_embeddings(self):
         return self.embeddings
+
+    def _prune_heads(self, heads_to_prune):
+        """Prunes heads of the model.
+        heads_to_prune: dict of {layer_num: list of heads to prune in this layer}
+        See base class PreTrainedModel
+        """
+        raise NotImplementedError
 
     def call(self,
              inputs,
@@ -351,7 +358,7 @@ class TFGlyceBertModel(TFBertPreTrainedModel):
     def __init__(self, config, *inputs, **kwargs):
         super().__init__(config, *inputs, **kwargs)
 
-        self.bert = TFGlyceBertMainLayer(config)
+        self.bert = TFGlyceBertMainLayer(config, name="bert")
 
     @property
     def dummy_inputs(self):
@@ -375,8 +382,7 @@ if __name__ == '__main__':
     from datasets.bert_dataset import BertDataset
     import numpy as np
 
-    # [your model path]
-    config = "/Users/tf_chinese_bert/ChineseBERT-base"
+    config = "[your model path]"
     tf_model = TFGlyceBertModel.from_pretrained(config)
 
     tokenizer = BertDataset(config)
@@ -401,6 +407,14 @@ if __name__ == '__main__':
     output = pt_model.forward(input_ids, pinyin_ids)
     output_hidden = output[0]
     print(output_hidden)
+
+    print("*"*10, "save and load tf2.x model", "*"*10)
+    tf.keras.models.save_model(tf_model, "./save_model")
+    tf_model = tf.keras.models.load_model("./save_model")
+
+
+
+
 
 
 
