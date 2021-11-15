@@ -255,7 +255,6 @@ MODEL_CLASSES = {
         ElectraForPreTraining,
         ELECTRA_PRETRAINED_CONFIG_ARCHIVE_MAP,
     ),
-    # todo.. you need add dummy input in torch and tf modeling file
     "chinese-bert": (
         BertConfig,
         TFGlyceBertModel,
