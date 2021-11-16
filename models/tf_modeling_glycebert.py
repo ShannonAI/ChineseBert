@@ -10,7 +10,7 @@ from transformers.configuration_bert import BertConfig
 from transformers.modeling_tf_utils import shape_list, get_initializer, keras_serializable
 from transformers.tokenization_utils import BatchEncoding
 from transformers.modeling_tf_outputs import TFBaseModelOutputWithPooling
-
+from transformers import TFBertForSequenceClassification
 
 @keras_serializable
 class TFGlyceBertMainLayer(tf.keras.layers.Layer):
@@ -382,7 +382,7 @@ if __name__ == '__main__':
     from datasets.bert_dataset import BertDataset
     import numpy as np
 
-    config = "[your model path]"
+    config = "/Users/bytedance/code/tf_chinese_bert/ChineseBERT-base"
     tf_model = TFGlyceBertModel.from_pretrained(config)
 
     tokenizer = BertDataset(config)
@@ -408,9 +408,48 @@ if __name__ == '__main__':
     output_hidden = output[0]
     print(output_hidden)
 
-    print("*"*10, "save and load tf2.x model", "*"*10)
-    tf.keras.models.save_model(tf_model, "./save_model")
-    tf_model = tf.keras.models.load_model("./save_model")
+    # 需要注意的是, 有些配置还是要拷贝过来
+    print("*"*10, "save and load as tf2.x model with hugging face save_pretrained and from_pretrained", "*"*10)
+    tf_model.save_pretrained('saved_model/glycebert/1')
+    del tf_model
+    tf_model = TFGlyceBertModel.from_pretrained('saved_model/glycebert/1')
+    tf_output = tf_model.predict([np.array([tf_input_ids]), np.array([tf_pinyin_ids])])
+    tf_output_hidden = tf_output[0]
+    print(tf_output_hidden)
+
+    # 推荐使用这种方式了, 不然千奇百怪的错误
+    print("*" * 10, "save and load as tf2.x model with tf save_weights and load_weights", "*" * 10)
+    tf_model.save_weights('saved_model/glycebert/2')
+    del tf_model
+    tf_model = TFGlyceBertModel.from_pretrained(config)  # load model
+    tf_model.load_weights('saved_model/glycebert/2')  # load weight
+    tf_output = tf_model.predict([np.array([tf_input_ids]), np.array([tf_pinyin_ids])])
+    tf_output_hidden = tf_output[0]
+    print(tf_output_hidden)
+
+    # 保存为tfserving需要的格式
+    print("*" * 10, "save and load as tf2.x savedModel then used in tfserving", "*" * 10)
+    callable = tf.function(tf_model.call)
+    concrete_function = callable.get_concrete_function([tf.TensorSpec([None, 150], tf.int32, name="input_ids"), tf.TensorSpec([None, 150, 8], tf.int32, name="pinyin_ids")])
+    tf_model.save('saved_model/distilbert/1', signatures=concrete_function)
+    """
+    # 先启动启动tf serving
+    docker run -p 8501:8501 --mount type=bind,source=/Users/bytedance/github/ChineseBert/models/saved_model/bert,target=/models/distilbert -e MODEL_NAME=distilbert -t tensorflow/serving
+    """
+    import requests
+    url = "http://localhost:8501/v1/models/distilbert:predict"
+    payload = {"instances": [{"input_ids": tf_input_ids.tolist(), "pinyin_ids": tf_pinyin_ids.tolist()}]}
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+    print(json.loads(response.text)['predictions'])
+
+
+
+
+
+
 
 
 
