@@ -10,7 +10,7 @@ from transformers.configuration_bert import BertConfig
 from transformers.modeling_tf_utils import shape_list, get_initializer, keras_serializable
 from transformers.tokenization_utils import BatchEncoding
 from transformers.modeling_tf_outputs import TFBaseModelOutputWithPooling
-from transformers import TFBertForSequenceClassification
+
 
 @keras_serializable
 class TFGlyceBertMainLayer(tf.keras.layers.Layer):
@@ -382,7 +382,7 @@ if __name__ == '__main__':
     from datasets.bert_dataset import BertDataset
     import numpy as np
 
-    config = "/Users/bytedance/code/tf_chinese_bert/ChineseBERT-base"
+    config = "[your model path]"
     tf_model = TFGlyceBertModel.from_pretrained(config)
 
     tokenizer = BertDataset(config)
@@ -417,7 +417,7 @@ if __name__ == '__main__':
     tf_output_hidden = tf_output[0]
     print(tf_output_hidden)
 
-    # 推荐使用这种方式了, 不然千奇百怪的错误
+    # 仅保存权重
     print("*" * 10, "save and load as tf2.x model with tf save_weights and load_weights", "*" * 10)
     tf_model.save_weights('saved_model/glycebert/2')
     del tf_model
@@ -434,7 +434,7 @@ if __name__ == '__main__':
     tf_model.save('saved_model/distilbert/1', signatures=concrete_function)
     """
     # 先启动启动tf serving
-    docker run -p 8501:8501 --mount type=bind,source=/Users/bytedance/github/ChineseBert/models/saved_model/bert,target=/models/distilbert -e MODEL_NAME=distilbert -t tensorflow/serving
+    docker run -p 8501:8501 --mount type=bind,source=/Users/github/ChineseBert/models/saved_model/bert,target=/models/distilbert -e MODEL_NAME=distilbert -t tensorflow/serving
     """
     import requests
     url = "http://localhost:8501/v1/models/distilbert:predict"
