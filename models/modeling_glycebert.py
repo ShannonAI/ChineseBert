@@ -61,6 +61,18 @@ class GlyceBertModel(BertModel):
 
         self.init_weights()
 
+    @property
+    def dummy_inputs(self):
+        """
+        Dummy inputs to build the network.
+
+        Returns:
+            :obj:`Dict[str, tf.Tensor]`: The dummy inputs.
+        """
+        return {"input_ids": torch.ones(size=(3, 6), dtype=torch.int64),
+                "pinyin_ids": torch.ones(size=(3, 6, 8), dtype=torch.int64)}
+
+
     def forward(
         self,
         input_ids=None,

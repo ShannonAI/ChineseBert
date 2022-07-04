@@ -4,3 +4,4 @@ torch==1.5.1
 transformers==3.4.0
 pytorch-lightning==0.9.0
 tensorboard==2.2.0
+tensorflow==2.3.2
