@@ -24,7 +24,7 @@ characters into language model pretraining.
 First, for each Chinese character, we get three kind of embedding.
  - **Char Embedding:** the same as origin BERT token embedding.
  - **Glyph Embedding:** capture visual features based on different fonts of a Chinese character.
- - **Pinyin Embedding:** capture phonetic feature from the pinyin sequence ot a Chinese Character.
+ - **Pinyin Embedding:** capture phonetic feature from the pinyin sequence of a Chinese Character.
  
 Then, char embedding, glyph embedding and pinyin embedding 
 are first concatenated, and mapped to a D-dimensional embedding through a fully 
