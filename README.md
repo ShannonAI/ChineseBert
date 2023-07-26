@@ -47,10 +47,10 @@ We provide pre-trained ChineseBERT models in Pytorch version and followed huggin
   
 Our model can be downloaded here:
 
-| Model | Model Hub | Google Drive |
-| --- | --- | --- |
-| **`ChineseBERT-base`**  | [564M](https://huggingface.co/ShannonAI/ChineseBERT-base) | [560M](https://drive.google.com/file/d/1CseJzc58W4s8U_eIuAnshHQmnmi7Sr5-/view?usp=sharing) |
-| **`ChineseBERT-large`**   | [1.4G](https://huggingface.co/ShannonAI/ChineseBERT-large) | [1.4G](https://drive.google.com/file/d/1-glLDbmCrPgs_odjPvacaBniY0KnC8Z5/view?usp=sharing) |
+| Model | Model Hub | Google Drive | Hugging Face 🤗 |
+| --- | --- | --- | --- |
+| **`ChineseBERT-base`**  | [564M](https://huggingface.co/ShannonAI/ChineseBERT-base) | [560M](https://drive.google.com/file/d/1CseJzc58W4s8U_eIuAnshHQmnmi7Sr5-/view?usp=sharing) | [592M](https://huggingface.co/iioSnail/ChineseBERT-base) | 
+| **`ChineseBERT-large`**   | [1.4G](https://huggingface.co/ShannonAI/ChineseBERT-large) | [1.4G](https://drive.google.com/file/d/1-glLDbmCrPgs_odjPvacaBniY0KnC8Z5/view?usp=sharing) | [1.5G](https://huggingface.co/iioSnail/ChineseBERT-large) |
 
 
 *Note: The model hub contains model, fonts and pinyin config files.*
